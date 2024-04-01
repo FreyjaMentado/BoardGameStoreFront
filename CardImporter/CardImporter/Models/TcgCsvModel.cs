@@ -1,5 +1,5 @@
 ﻿namespace CardImporter.Models;
-public class TcgModel
+public class TcgCsvModel
 {
     public int Quantity { get; set; }
     public string Name { get; set; }

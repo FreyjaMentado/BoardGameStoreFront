@@ -3,7 +3,7 @@ using CsvHelper.Configuration;
 
 namespace CardImporter.Services;
 
-public class ModelClassMap : ClassMap<TcgModel>
+public class ModelClassMap : ClassMap<TcgCsvModel>
 {
 #pragma warning disable IDE0058 // Expression value is never used
     public ModelClassMap()
