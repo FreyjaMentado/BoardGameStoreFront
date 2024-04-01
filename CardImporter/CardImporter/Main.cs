@@ -1,5 +1,6 @@
 ﻿using CardImporter.Models;
 using CardImporter.Services;
+using CardImporter.Swagger;
 using CsvHelper;
 using Newtonsoft.Json;
 using System.Globalization;
@@ -18,6 +19,7 @@ public static class Main
 
         //Combine summary model and detail model into our DTO model
         //Create that here
+        var dtos = new List<CardDto>();
         //var dtos = summaries + details ...
 
         //POST to our API for importing 
