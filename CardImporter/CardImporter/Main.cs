@@ -16,35 +16,11 @@ public static class Main
         var client = GetClient();
         var summaries = await GetCardSummariesAsync(client);
 
-        var cards = await GetCardDetails(client, summaries);
-
-        //Combine summary model and detail model into our DTO model
-        //Create that here
+        //Create our model and map to it from summaries
         var dtos = new List<CardDto>();
-        //var dtos = summaries + details ...
+        //var dtos = summaries ...
 
         //POST to our API for importing 
-    }
-
-    private static async Task<List<Scry_Card>> GetCardDetails(HttpClient client, List<Scry_Card> cards)
-    {
-        var results = new List<Scry_Card>();
-        foreach (var card in cards)
-        {
-            //need to check if post result and get result have same inner model defn. I dont think they do.
-            //need to use json attribute?
-            //get result had uris raw but post didnt
-            //maybe different model
-            var task = client.GetAsync(card.Uri);
-            var result = await task.Result.Content.ReadAsStringAsync();
-
-            var cardDetails = JsonConvert.DeserializeObject<Scry_Card>(result);
-            results.Add(cardDetails);
-
-            //Scryfall requests 50-100ms delay per call
-            await Task.Delay(100);
-        }
-        return results;
     }
 
     private static Scry_PostCard_Request GetCardsRequest()
@@ -71,8 +47,22 @@ public static class Main
     {
         //TODO: add error handling for nulls and fail responses 
         var request = GetCardsRequest();
+        request.identifiers = new List<ScryFall_CardIdentifier_Request> { request.identifiers[0] };
         var task = client.PostAsJsonAsync("cards/collection", request);
         var result = await task.Result.Content.ReadAsStringAsync();
+
+        dynamic temp = JsonConvert.DeserializeObject(result);
+        var first = JsonConvert.SerializeObject(temp, Formatting.Indented);
+
+        dynamic temp1 = JsonConvert.DeserializeObject<Scry_PostCard_Response>(result);
+        var second = JsonConvert.SerializeObject(temp1, Formatting.Indented);
+
+        if (first != second)
+        {
+            //TODO fix model so that this is at least almost true 
+            throw new Exception();
+        }
+
         return JsonConvert.DeserializeObject<Scry_PostCard_Response>(result).Data;
     }
 
