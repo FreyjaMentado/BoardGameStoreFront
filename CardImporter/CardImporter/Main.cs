@@ -10,6 +10,7 @@ namespace CardImporter;
 
 public static class Main
 {
+    //Notes: Discuss Test driven development api side
     public static async Task InitializeAsync()
     {
         var client = GetClient();

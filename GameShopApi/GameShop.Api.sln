@@ -5,11 +5,16 @@ VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Api", "GameShop.Api\GameShop.Api.csproj", "{95640349-B0BB-43DA-95F0-B3E5839BEE0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop.Domain", "GameShop.Domain\GameShop.Domain.csproj", "{4BE1B2CD-EFD0-4A76-ADC5-3AEE0603A43B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Domain", "GameShop.Domain\GameShop.Domain.csproj", "{4BE1B2CD-EFD0-4A76-ADC5-3AEE0603A43B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop.Base", "GameShop.Base\GameShop.Base.csproj", "{DDE66FF6-77B1-405F-A4C3-415E4D48B235}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Base", "GameShop.Base\GameShop.Base.csproj", "{DDE66FF6-77B1-405F-A4C3-415E4D48B235}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameShop.Application", "GameShop.Application\GameShop.Application.csproj", "{0C54F563-577F-4BF7-A392-8E02117E4242}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Application", "GameShop.Application\GameShop.Application.csproj", "{0C54F563-577F-4BF7-A392-8E02117E4242}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EDB376AB-132A-4B9C-B5C8-62C8FE493047}"
+	ProjectSection(SolutionItems) = preProject
+		..\Design Plans.md = ..\Design Plans.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
