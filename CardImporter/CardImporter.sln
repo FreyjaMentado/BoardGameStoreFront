@@ -11,7 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardImporter.Swagger", "Car
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{F8C2D468-68D3-454E-BF2C-9F996D228818}"
 	ProjectSection(SolutionItems) = preProject
-		..\Design Plans.md = ..\Design Plans.md
+		..\Documents\Design Plans.md = ..\Documents\Design Plans.md
+		..\Documents\Mariposa MVP.md = ..\Documents\Mariposa MVP.md
 	EndProjectSection
 EndProject
 Global

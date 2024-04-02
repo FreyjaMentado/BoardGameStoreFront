@@ -13,7 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameShop.Application", "Gam
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{EDB376AB-132A-4B9C-B5C8-62C8FE493047}"
 	ProjectSection(SolutionItems) = preProject
-		..\Design Plans.md = ..\Design Plans.md
+		..\Documents\Design Plans.md = ..\Documents\Design Plans.md
+		..\Documents\Mariposa MVP.md = ..\Documents\Mariposa MVP.md
 	EndProjectSection
 EndProject
 Global
