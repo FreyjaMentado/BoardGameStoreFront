@@ -11,6 +11,7 @@ namespace CardImporter;
 public static class Main
 {
     //Notes: Discuss Test driven development api side
+    // ExternalIds on user, and scryflal card id
     public static async Task InitializeAsync()
     {
         var client = GetClient();
