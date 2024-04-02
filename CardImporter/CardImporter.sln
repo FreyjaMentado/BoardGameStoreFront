@@ -6,11 +6,13 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardImporter", "CardImporter\CardImporter.csproj", "{E28A9723-08C2-4A57-9ACD-E81DBC734290}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{531C918C-D8BB-4604-9E85-EAD4A7280022}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CardImporter.Swagger", "CardImporter.Swagger\CardImporter.Swagger.csproj", "{6D21DBD0-23A9-43FD-A2C2-CAC43BEF978D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{F8C2D468-68D3-454E-BF2C-9F996D228818}"
 	ProjectSection(SolutionItems) = preProject
 		..\Design Plans.md = ..\Design Plans.md
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardImporter.Swagger", "CardImporter.Swagger\CardImporter.Swagger.csproj", "{6D21DBD0-23A9-43FD-A2C2-CAC43BEF978D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F8C2D468-68D3-454E-BF2C-9F996D228818} = {531C918C-D8BB-4604-9E85-EAD4A7280022}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23C128AB-5BF6-4EDF-9BCF-664D3DE2AAF8}
