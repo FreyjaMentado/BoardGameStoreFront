@@ -102,7 +102,7 @@ User Page
 	OrderStatusId FK (value from OrderStatuses) 
 
 **Cart**  
-	 Id
+	Id
 	UserId FK
 	OrderId FK
 	ProductType (value from ProductTypes) FK
