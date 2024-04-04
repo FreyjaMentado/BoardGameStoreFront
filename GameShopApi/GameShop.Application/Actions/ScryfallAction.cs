@@ -1,19 +1,17 @@
-﻿using CsvHelper;
-using GameShop.Application.Models.Scryfall;
+﻿using GameShop.Application.Models.Scryfall;
 using GameShop.Application.Models.Tcg;
 using Newtonsoft.Json;
-using System.Globalization;
 using System.Net.Http.Json;
 
 namespace GameShop.Application.Actions;
-internal class ScryfallAction
+public class ScryfallAction
 {
     //Notes: Discuss Test driven development api side
     // ExternalIds on user, and scryflal card id
-    public static async Task InitializeAsync()
+    public async Task InitializeAsync(List<CsvImportModel> models)
     {
         var client = GetClient();
-        var summaries = await GetCardSummariesAsync(client);
+        var summaries = await GetCardSummariesAsync(client, models);
 
         //Create our model and map to it from summaries
         //var dtos = new List<CardDto>();
@@ -22,10 +20,8 @@ internal class ScryfallAction
         //POST to our API for importing 
     }
 
-    private static PostCard_Request GetCardsRequest()
+    private PostCard_Request GetCardsRequest(List<CsvImportModel> models)
     {
-        var models = ReadCsv();
-
         //TODO: Do batches of 75 max
         var request = new PostCard_Request();
         foreach (var x in models)
@@ -35,17 +31,17 @@ internal class ScryfallAction
         return request;
     }
 
-    private static async Task GetAllCardNames(HttpClient client)
+    private async Task GetAllCardNames(HttpClient client)
     {
         //TODO: Possibly use this for validations later. May not be useful. 
         var task = client.GetAsync("https://api.scryfall.com/catalog/card-names");
         var result = await task.Result.Content.ReadAsStringAsync();
     }
 
-    private static async Task<List<Scry_Card>> GetCardSummariesAsync(HttpClient client)
+    private async Task<List<Scry_Card>> GetCardSummariesAsync(HttpClient client, List<CsvImportModel> models)
     {
         //TODO: add error handling for nulls and fail responses 
-        var request = GetCardsRequest();
+        var request = GetCardsRequest(models);
         request.identifiers = new List<CardIdentifier_Request> { request.identifiers[0] };
         var task = client.PostAsJsonAsync("cards/collection", request);
         var result = await task.Result.Content.ReadAsStringAsync();
@@ -65,27 +61,11 @@ internal class ScryfallAction
         return JsonConvert.DeserializeObject<PostCard_Response>(result).Data;
     }
 
-    private static HttpClient GetClient()
+    private HttpClient GetClient()
     {
         return new HttpClient()
         {
             BaseAddress = new Uri("https://api.scryfall.com/"),
         };
-    }
-
-    private static List<CsvImportModel> ReadCsv()
-    {
-        //This pathing dir thing might not work in deployed versions 
-        var fileName = "Sample_TCG_Import.csv";
-        var path = Path.Combine(Environment.CurrentDirectory, @"..\\..\\..\\", fileName);
-
-        using (TextReader txt = new StreamReader(path))
-        {
-            using (var csv = new CsvReader(txt, CultureInfo.CurrentCulture))
-            {
-                _ = csv.Context.RegisterClassMap<ModelClassMap>();
-                return csv.GetRecords<CsvImportModel>().ToList();
-            }
-        }
     }
 }
