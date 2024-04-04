@@ -9,12 +9,12 @@ namespace GameShop.Api.Controllers;
 public class CardsController : Controller
 {
     private readonly ILogger<CardsController> _logger;
-
     public CardsController(ILogger<CardsController> logger) => _logger = logger;
 
     [HttpPost("import")]
     public async Task<ActionResult> Import([FromBody] List<CsvImportModel> models)
     {
+        //TODO: if any model has a property that is null, alert user, but continue upload?
         var action = new ScryfallAction();
         await action.InitializeAsync(models);
 
