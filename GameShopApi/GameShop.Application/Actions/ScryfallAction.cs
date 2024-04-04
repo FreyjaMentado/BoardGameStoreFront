@@ -17,7 +17,6 @@ public class ScryfallAction
         //var dtos = new List<CardDto>();
         //var dtos = summaries ...
 
-        //POST to our API for importing 
     }
 
     private PostCard_Request GetCardsRequest(List<CsvImportModel> models)
