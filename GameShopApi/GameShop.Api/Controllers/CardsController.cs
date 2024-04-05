@@ -12,9 +12,10 @@ public class CardsController : Controller
     public CardsController(ILogger<CardsController> logger) => _logger = logger;
 
     [HttpPost("import")]
-    public async Task<ActionResult> Import([FromBody] List<CsvImportModel> models)
+    public async Task<ActionResult> Import([FromBody] List<ImportModel> models)
     {
         //TODO: if any model has a property that is null, alert user, but continue upload?
+
         var action = new ScryfallAction();
         await action.InitializeAsync(models);
 

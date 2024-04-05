@@ -8,7 +8,7 @@ public class ScryfallAction
 {
     //Notes: Discuss Test driven development api side
     // ExternalIds on user, and scryfall card id
-    public async Task InitializeAsync(List<CsvImportModel> models)
+    public async Task InitializeAsync(List<ImportModel> models)
     {
         var client = GetClient();
         var summaries = await GetCardSummariesAsync(client, models);
@@ -19,7 +19,7 @@ public class ScryfallAction
         //Set it to the context 
     }
 
-    private PostCard_Request GetCardsRequest(List<CsvImportModel> models)
+    private PostCard_Request GetCardsRequest(List<ImportModel> models)
     {
         //TODO: Do batches of 75 max
         var request = new PostCard_Request();
@@ -37,7 +37,7 @@ public class ScryfallAction
         var result = await task.Result.Content.ReadAsStringAsync();
     }
 
-    private async Task<List<Scry_Card>> GetCardSummariesAsync(HttpClient client, List<CsvImportModel> models)
+    private async Task<List<Scry_Card>> GetCardSummariesAsync(HttpClient client, List<ImportModel> models)
     {
         //TODO: add error handling for nulls and fail responses 
         var request = GetCardsRequest(models);
