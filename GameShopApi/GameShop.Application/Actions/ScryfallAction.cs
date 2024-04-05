@@ -19,46 +19,27 @@ public class ScryfallAction
         //Set it to the context 
     }
 
-    private PostCard_Request GetCardsRequest(List<ImportModel> models)
-    {
-        //TODO: Do batches of 75 max
-        var request = new PostCard_Request();
-        foreach (var x in models.Take(75))
-        {
-            request.identifiers.Add(new CardIdentifier_Request(x.Name, x.SetCode));
-        }
-        return request;
-    }
-
-    private async Task GetAllCardNames(HttpClient client)
-    {
-        //TODO: Possibly use this for validations later. May not be useful. 
-        var task = client.GetAsync("https://api.scryfall.com/catalog/card-names");
-        var result = await task.Result.Content.ReadAsStringAsync();
-    }
-
     private async Task<List<Scry_Card>> GetCardSummariesAsync(HttpClient client, List<ImportModel> models)
     {
         //TODO: add error handling for nulls and fail responses 
-        var request = GetCardsRequest(models);
-        //request.identifiers = new List<CardIdentifier_Request> { request.identifiers[0] };
-        var task = client.PostAsJsonAsync("cards/collection", request);
-        var result = await task.Result.Content.ReadAsStringAsync();
+        var responses = new List<Scry_Card>();
+        for (var i = 0; i < Math.Ceiling((decimal)models.Count / 75); i++)
+        {
+            var request = new PostCard_Request();
+            foreach (var x in models.Skip(i * 75).Take(75))
+            {
+                request.identifiers.Add(new CardIdentifier_Request(x.Name, x.SetCode));
+            }
+            var task = client.PostAsJsonAsync("cards/collection", request);
+            var result = await task.Result.Content.ReadAsStringAsync();
+            responses.AddRange(JsonConvert.DeserializeObject<PostCard_Response>(result).Data);
+            await DelayAsync();
+        }
 
-        //dynamic temp = JsonConvert.DeserializeObject(result);
-        //var first = JsonConvert.SerializeObject(temp, Formatting.Indented);
-
-        //dynamic temp1 = JsonConvert.DeserializeObject<PostCard_Response>(result);
-        //var second = JsonConvert.SerializeObject(temp1, Formatting.Indented);
-
-        //if (first != second)
-        //{
-        //    //TODO fix model so that this is at least almost true 
-        //    throw new Exception();
-        //}
-
-        return JsonConvert.DeserializeObject<PostCard_Response>(result).Data;
+        return responses;
     }
+
+    private static async Task DelayAsync() => await Task.Delay(100);
 
     private HttpClient GetClient()
     {
